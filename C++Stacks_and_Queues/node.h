@@ -1,5 +1,5 @@
 // NAME: AISHWARYA ADIKI
-// NETID: AXA180100
+
 #ifndef __node_h__
 #define __node_h__
 
