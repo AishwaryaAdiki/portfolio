@@ -1,6 +1,5 @@
 package Tickets3; // packages are usually named in lowercase, but the project documentation says that the name should be "Tickets"
-// NAME: AISHWARYA ADIKI
-// NET-ID: AXA180100
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
