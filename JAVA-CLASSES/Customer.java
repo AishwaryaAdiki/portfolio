@@ -1,6 +1,5 @@
 package DrinkRewards;
-//NAME: AISHWARYA ADIKI
-//NETID: AXA180100
+
 import java.text.DecimalFormat;
 
 public class Customer {
