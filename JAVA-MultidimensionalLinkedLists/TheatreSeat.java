@@ -1,7 +1,6 @@
 package Tickets;
 
-// NAME: AISHWARYA ADIKI
-// NET ID: AXA180100
+
 
 public class TheatreSeat extends Node {
     // Each node will have four pointers: up, down, left, right
