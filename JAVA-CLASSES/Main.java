@@ -1,6 +1,5 @@
 package DrinkRewards;
-//NAME: AISHWARYA ADIKI
-//NETID: AXA180100
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
