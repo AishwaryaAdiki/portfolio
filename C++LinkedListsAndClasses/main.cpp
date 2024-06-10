@@ -1,6 +1,5 @@
 /*
  Name: AISHWARYA ADIKI
- NET ID: AXA180100
 */
 
 #include <iostream>
