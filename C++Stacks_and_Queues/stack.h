@@ -1,9 +1,4 @@
-// NAME: AISHWARYA ADIKI
-// NETID: AXA180100
-//  Stack.hpp
-//  Homework 7
-//  Created by Aishwarya Adiki on 11/6/19.
-//  Copyright © 2019 Aishwarya Adiki. All rights reserved.
+
 #ifndef __stack_hpp__
 #define __stack_hpp__
 
