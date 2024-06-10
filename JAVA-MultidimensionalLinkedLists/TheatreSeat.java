@@ -1,7 +1,5 @@
 package Tickets;
 
-
-
 public class TheatreSeat extends Node {
     // Each node will have four pointers: up, down, left, right
     TheatreSeat up; // UP POINTER OF A THEATRESEAT NODE
