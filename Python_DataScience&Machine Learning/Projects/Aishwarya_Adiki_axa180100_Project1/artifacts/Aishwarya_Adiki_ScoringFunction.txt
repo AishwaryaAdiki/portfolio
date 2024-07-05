@@ -1,0 +1,82 @@
+def project_1_scoring(df):
+    """
+    Function to score input dataset.
+    
+    Input: dataset in Pandas DataFrame format
+    Output: Python list of labels in the same order as input records
+    
+    Flow:
+        - Load artifacts
+        - Transform dataset
+        - Score dataset
+        - Return labels
+    
+    """
+    from sklearn.preprocessing import OneHotEncoder
+    import category_encoders as ce 
+    import pandas as pd
+    import numpy as np
+    pd.set_option('display.max_columns', 1500)
+    import warnings
+    warnings.filterwarnings('ignore')
+    #Extend cell width
+    from IPython.core.display import display, HTML
+    display(HTML("<style>.container { width:80% !important; }</style>"))
+    from copy import deepcopy
+    from sklearn.model_selection import GridSearchCV 
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.metrics import f1_score, make_scorer 
+    import pickle
+    from sklearn.preprocessing import MinMaxScaler, StandardScaler
+    from sklearn.model_selection import train_test_split
+    from sklearn.model_selection import PredefinedSplit
+    from sklearn.metrics import confusion_matrix
+    
+
+    '''Load Artifacts'''
+    artifacts_dict_file = open("Aishwarya_Adiki_axa180100_Project-1.pickle", "rb")
+    artifacts_dict = pickle.load(file=artifacts_dict_file)
+    artifacts_dict_file.close()
+
+    clf = artifacts_dict["model"]
+    categorical_columns = artifacts_dict["categorical_columns"]
+    numerical_variables = artifacts_dict["numerical_variables"]
+    StandardScaler = artifacts_dict["StandardScaler"]
+    columns_to_score = artifacts_dict["columns_to_train"]
+    target_encoder = artifacts_dict["target_encoder"]
+    threshold = artifacts_dict["threshold"]
+
+
+    #X = data.copy()
+
+    '''TRANSFORMING DATA: '''
+    df_holdout = df.copy() # we have got the raw data here
+    # df_holdout = df_holdout.drop(columns=['index']) 
+    df_holdout[categorical_columns]=df_holdout[categorical_columns].fillna('Missing')
+    df_holdout=df_holdout.fillna(0.0)
+
+    '''Encode categorical columns'''
+    df_holdout_transformed = df_holdout.join(target_encoder.transform(df_holdout[categorical_columns]), lsuffix='', rsuffix='_trg')
+    df_holdout_transformed = df_holdout_transformed.drop(columns=['Zip', 'NAICS', 'NoEmp', 'NewExist', 'CreateJob', 'RetainedJob',
+       'FranchiseCode', 'UrbanRural', 'DisbursementGross', 'BalanceGross',
+       'GrAppv', 'SBA_Appv','City', 'State', 'Bank', 'BankState', 'RevLineCr', 'LowDoc' ])
+
+    
+    '''Scale Numerical columns'''
+    df_holdout_sca = StandardScaler.transform(df_holdout[numerical_variables])
+    df_holdout_sca = pd.DataFrame(df_holdout_sca, index=df_holdout.index)
+    df_holdout_sca = df_holdout_sca.rename(columns={0: "Zip", 1: "NAICS", 2: "NoEmp", 3:'NewExist', 4:'CreateJob', 5:'RetainedJob',
+       6:'FranchiseCode', 7:'UrbanRural', 8:'DisbursementGross', 9:'BalanceGross',
+       10:'GrAppv', 11:'SBA_Appv'})
+    df_holdout_transformed = df_holdout_transformed.join(df_holdout_sca)
+
+    '''SCORING DATASET: '''
+    y_pred_proba = clf.predict_proba(df_holdout_transformed[columns_to_score])
+    y_pred = (y_pred_proba[:,0] < 0.9).astype(np.int16)
+    d = {"index":df_holdout_transformed["index"],
+         "label":y_pred,
+         "probability_0":y_pred_proba[:,0],
+         "probability_1":y_pred_proba[:,1]}
+
+    '''DISPLAYING RESULT AS A PYTHON LIST: '''
+    return pd.DataFrame(d).label.tolist()
