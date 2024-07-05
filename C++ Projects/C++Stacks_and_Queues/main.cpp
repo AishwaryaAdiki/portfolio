@@ -1,8 +1,5 @@
 // NAME: AISHWARYA ADIKI
-//  main.cpp
-//  Homework 7
-//  Created by Aishwarya Adiki on 11/6/19.
-//  Copyright © 2019 Aishwarya Adiki. All rights reserved.
+
 
 #include <iostream>
 #include "node.h"
