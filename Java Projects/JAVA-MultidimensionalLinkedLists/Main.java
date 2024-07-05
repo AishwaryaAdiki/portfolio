@@ -1,6 +1,6 @@
 package Tickets;
 // NAME: AISHWARYA ADIKI
-// NET ID: AXA180100
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
