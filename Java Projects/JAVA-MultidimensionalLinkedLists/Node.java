@@ -1,7 +1,7 @@
 package Tickets;
 
 // NAME: AISHWARYA ADIKI
-// NET ID: AXA180100
+
 
 public abstract class  Node  {
     protected int row; //  an integer variable to represent the row
