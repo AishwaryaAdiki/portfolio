@@ -1,5 +1,4 @@
 // NAME: AISHWARYA ADIKI
-//  Copyright © 2019 Aishwarya Adiki. All rights reserved.
 
 
 #include "node.h"
